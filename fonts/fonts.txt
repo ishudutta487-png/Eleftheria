@@ -1,0 +1,8 @@
+Place Middleburg Regular here as:
+
+  Middleburg-Regular.ttf
+
+The site will use it for the wordmark "Eleftheria".
+Until that file is present, Great Vibes is the licensed web fallback
+(Middleburg itself is personal-use unless you buy a commercial license
+from Mayofont / Rizky Alemayo).

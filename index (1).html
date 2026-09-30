@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ELEFTHERIA — A platform for young people who won't stay quiet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Caveat:wght@500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@500&family=Noto+Sans+Arabic:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FFFFFF;
+    --ink: #3B4A5C;
+    --ink-deep: #2B384A;
+    --ink-soft: rgba(59,74,92,0.68);
+    --line: rgba(59,74,92,0.14);
+    --concern: #E14B3D;
+    --concern-soft: rgba(225,75,61,0.1);
+    --tint: #F5F6F7;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  *, *::before, *::after { box-sizing: inherit; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, .display {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    margin: 0;
+    color: var(--ink);
+  }
+  a { color: inherit; }
+  button { font-family: inherit; cursor: pointer; }
+  img, svg { max-width: 100%; display: block; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+  .eyebrow { font-size: 13.5px; letter-spacing: 0.02em; color: var(--concern); margin-bottom: 14px; }
+
+  /* ---------- Header: classic bar (logo left, links center, CTA right) ---------- */
+  header {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 50;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-pill {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 32px;
+  }
+  .nav-mark {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 19px;
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+    justify-self: start;
+  }
+  .navlinks { display: none; gap: 8px; align-items: center; justify-self: center; }
+  .navlinks a {
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-size: 14px;
+    padding: 9px 16px;
+    border-radius: 999px;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .navlinks a:hover { color: var(--ink); background: var(--tint); }
+  .navlinks a.active { color: #fff; background: var(--concern); }
+  @media (min-width: 760px) { .navlinks { display: flex; } }
+  .nav-cta {
+    display: none;
+    justify-self: end;
+    text-decoration: none;
+    background: var(--ink);
+    color: #fff;
+    font-size: 13.5px;
+    font-weight: 500;
+    padding: 11px 22px;
+    border-radius: 999px;
+    white-space: nowrap;
+    transition: background .2s ease;
+  }
+  .nav-cta:hover { background: var(--ink-deep); }
+  @media (min-width: 760px) { .nav-cta { display: inline-block; } }
+  .burger {
+    justify-self: end;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: none;
+  }
+  @media (min-width: 760px) { .burger { display: none; } }
+  .burger span, .burger::before, .burger::after { content:""; display:block; }
+  .burger-lines { width: 16px; height: 12px; position: relative; }
+  .burger-lines span { position:absolute; left:0; right:0; height:1.6px; background: var(--ink); transition: transform .2s ease, opacity .2s ease; }
+  .burger-lines span:nth-child(1){ top:0; }
+  .burger-lines span:nth-child(2){ top:50%; margin-top:-0.8px; }
+  .burger-lines span:nth-child(3){ bottom:0; }
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    gap: 2px;
+    max-width: 1180px;
+    margin: 0 auto;
+    background: #fff;
+    border-top: 1px solid var(--line);
+    padding: 10px 22px 16px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { text-decoration:none; color: var(--ink); font-size: 15px; padding: 12px 14px; border-radius: 12px; }
+  .mobile-menu a.active { background: var(--concern-soft); color: var(--concern); }
+  @media (min-width: 760px) { .mobile-menu { display: none !important; } }
+
+  /* ---------- Pages ---------- */
+  .page { display: none; }
+  .page.active { display: block; animation: fadeIn .35s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px);} to { opacity:1; transform:none; } }
+
+  /* ---------- Hero (tilted card) ---------- */
+  .hero-outer { padding: 28px 20px 0; }
+  .hero-card {
+    max-width: 1080px;
+    margin: 0 auto;
+    background: var(--ink);
+    border-radius: 32px;
+    transform: rotate(-0.8deg);
+    padding: 76px 28px 110px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-card::after {
+    content: "";
+    position: absolute;
+    left: -10%;
+    right: -10%;
+    bottom: -60px;
+    height: 140px;
+    background: var(--paper);
+    border-radius: 50%;
+  }
+  .hero-inner { position: relative; z-index: 2; transform: rotate(0.8deg); }
+  .wordmark-big {
+    font-family: 'Allura', cursive;
+    font-weight: 400;
+    font-size: clamp(64px, 15vw, 168px);
+    line-height: 1;
+    letter-spacing: 0.01em;
+    background: linear-gradient(115deg, #F2A65A 0%, #E9C46A 18%, #E14B3D 36%, #C0568F 52%, #6B4E9E 68%, #2A9D8F 84%, #F2A65A 100%);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: wordmarkShift 14s ease-in-out infinite;
+  }
+  @keyframes wordmarkShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .motto {
+    margin-top: 26px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px 18px;
+    font-size: 16px;
+  }
+  .motto span.pair { display: inline-flex; align-items: baseline; gap: 7px; }
+  .motto .word { color: var(--paper); }
+  .motto .gloss { font-size: 12px; color: rgba(242,239,230,0.55); font-style: italic; }
+  .motto .sa { font-family: 'Noto Sans Devanagari', sans-serif; font-size: 18px; }
+  .motto .ar { font-family: 'Noto Sans Arabic', sans-serif; font-size: 18px; }
+  .motto .dot { color: var(--concern); }
+  .mission {
+    margin: 30px auto 0;
+    max-width: 40ch;
+    font-size: 19px;
+    color: rgba(242,239,230,0.85);
+  }
+  .mission strong { color: var(--concern); font-weight: 600; }
+  .hero-cta { margin-top: 34px; display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block;
+    padding: 13px 26px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 14.5px;
+    font-weight: 500;
+    border: 1px solid var(--concern);
+    transition: background 0.2s ease, color 0.2s ease, transform .15s ease;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn-solid { background: var(--concern); color: #fff; }
+  .btn-solid:hover, .btn-solid:focus-visible { background: #c73c2f; }
+  .btn-ghost { color: var(--paper); border-color: rgba(242,239,230,0.3); }
+  .btn-ghost:hover, .btn-ghost:focus-visible { border-color: var(--paper); }
+  .btn-dark { border-color: var(--ink); color: var(--ink); }
+  .btn-dark:hover { background: var(--ink); color: #fff; }
+
+  /* ---------- generic sections ---------- */
+  .section { padding: 76px 0; border-bottom: 1px solid var(--line); }
+  .section.tint { background: var(--tint); }
+  .section:last-of-type { border-bottom: none; }
+  .section-head { max-width: 62ch; margin-bottom: 44px; }
+  .section-head h2 { font-size: clamp(26px, 3.6vw, 36px); line-height: 1.15; }
+  .section-head p { margin-top: 14px; color: var(--ink-soft); font-size: 17px; max-width: 56ch; }
+
+  /* ---------- offer list ---------- */
+  .offer-list { border-top: 1px solid var(--line); }
+  .offer-item { display: grid; grid-template-columns: 1fr; gap: 10px; padding: 30px 0; border-bottom: 1px solid var(--line); }
+  @media (min-width: 700px) { .offer-item { grid-template-columns: 200px 1fr; gap: 40px; } }
+  .offer-name { font-family: 'Fraunces', serif; font-style: italic; font-size: 21px; color: var(--concern); }
+  .offer-desc { max-width: 56ch; color: var(--ink-soft); font-size: 16.5px; }
+  .offer-desc strong { color: var(--ink); font-weight: 600; }
+
+  /* ---------- coming soon ---------- */
+  .soon-grid { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
+  @media (min-width: 700px) { .soon-grid { grid-template-columns: repeat(2, 1fr); } }
+  .soon-card { background: var(--paper); padding: 28px; }
+  .soon-tag { display: inline-block; font-size: 11.5px; letter-spacing: 0.04em; color: var(--concern); border: 1px solid var(--concern); border-radius: 999px; padding: 3px 10px; margin-bottom: 14px; }
+  .soon-card h3 { font-size: 19px; font-style: italic; font-weight: 500; }
+  .soon-card p { margin-top: 8px; font-size: 15px; color: var(--ink-soft); }
+  .soon-note { margin-top: 24px; font-size: 14.5px; color: var(--ink-soft); }
+  .soon-note a { color: var(--concern); text-decoration: none; border-bottom: 1px solid var(--concern); }
+
+  /* ---------- About page ---------- */
+  .about-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
+  @media (min-width: 760px) { .about-grid { grid-template-columns: 0.8fr 1.2fr; gap: 64px; } }
+  .about-body p { font-size: 17.5px; color: var(--ink-soft); max-width: 58ch; }
+  .about-body p + p { margin-top: 18px; }
+  .values-list { margin-top: 40px; display: grid; grid-template-columns: 1fr; gap: 22px; }
+  @media (min-width: 700px) { .values-list { grid-template-columns: repeat(3,1fr); } }
+  .value-card { border-top: 2px solid var(--concern); padding-top: 14px; }
+  .value-card h3 { font-size: 17px; font-style: italic; font-weight: 500; }
+  .value-card p { margin-top: 8px; font-size: 14.5px; color: var(--ink-soft); }
+
+  /* ---------- Gallery page ---------- */
+  .gallery-note { font-size: 14.5px; color: var(--ink-soft); margin-bottom: 28px; }
+
+  /* ---------- Board page ---------- */
+  .prompt-card {
+    background: var(--ink);
+    border-radius: 20px;
+    padding: 32px 30px;
+    margin-bottom: 22px;
+  }
+  .prompt-label { font-size: 12.5px; letter-spacing: 0.04em; color: #f0a89f; margin-bottom: 10px; }
+  .prompt-card h3 { color: #fff; font-size: clamp(20px, 3vw, 27px); font-style: italic; font-weight: 500; }
+  .board-note-note {
+    font-size: 14px;
+    color: var(--ink-soft);
+    background: var(--tint);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 40px;
+  }
+  .board-note-note strong { color: var(--ink); }
+
+  .corkboard {
+    position: relative;
+    border-radius: 10px;
+    padding: 36px 28px 40px;
+    background-color: #BB8E5C;
+    background-image:
+      radial-gradient(rgba(0,0,0,0.16) 1px, transparent 1.5px),
+      radial-gradient(rgba(255,255,255,0.10) 1px, transparent 1.5px),
+      radial-gradient(rgba(0,0,0,0.08) 1px, transparent 1.8px),
+      linear-gradient(160deg, rgba(255,255,255,0.10), rgba(0,0,0,0.14));
+    background-size: 9px 9px, 13px 13px, 21px 21px, cover;
+    background-position: 0 0, 4px 6px, 2px 10px, 0 0;
+    border: 14px solid transparent;
+    border-image: linear-gradient(135deg, #8B5E3C, #5A3B22 40%, #8B5E3C 70%, #6B4A32) 1;
+    box-shadow: 0 22px 44px rgba(43,56,74,0.28), inset 0 0 50px rgba(0,0,0,0.22);
+  }
+  .sticky-wall {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px 26px;
+    position: relative;
+    z-index: 1;
+  }
+  @media (min-width: 620px) { .sticky-wall { grid-template-columns: repeat(2,1fr); } }
+  @media (min-width: 980px) { .sticky-wall { grid-template-columns: repeat(3,1fr); } }
+  .sticky-note {
+    position: relative;
+    min-height: 150px;
+    padding: 30px 22px 20px;
+    border-radius: 2px;
+    box-shadow: 0 14px 22px rgba(0,0,0,0.28), 0 2px 4px rgba(0,0,0,0.18);
+    transform: rotate(var(--r, -1.5deg));
+    transition: transform .2s ease;
+  }
+  .sticky-note:hover { transform: rotate(0deg) translateY(-3px) scale(1.02); z-index: 2; }
+  .sticky-note::before {
+    content: "";
+    position: absolute;
+    top: -10px; left: 50%;
+    width: 18px; height: 18px;
+    margin-left: -9px;
+    border-radius: 999px;
+    background: radial-gradient(circle at 35% 30%, #ff8a7a, #c0392b 70%, #8a2418 100%);
+    box-shadow: 0 3px 4px rgba(0,0,0,0.4);
+  }
+  .sticky-note p {
+    font-family: 'Caveat', cursive;
+    font-weight: 600;
+    font-size: 23px;
+    line-height: 1.35;
+    color: var(--ink-deep);
+    margin: 0;
+  }
+  .sticky-author {
+    display: block;
+    margin-top: 14px;
+    font-family: 'Inter';
+    font-size: 12px;
+    color: rgba(59,74,92,0.6);
+  }
+  .sticky-note.c1 { background: #FBE3B4; --r: -2deg; }
+  .sticky-note.c2 { background: #F6C9C0; --r: 1.5deg; }
+  .sticky-note.c3 { background: #CDEAE3; --r: -1deg; }
+  .sticky-note.c4 { background: #E3DAF2; --r: 2deg; }
+  .sticky-note.c5 { background: #C9E4F5; --r: -2.5deg; }
+
+  .add-note-block { margin-top: 44px; max-width: 460px; }
+  .note-form { display: none; margin-top: 20px; }
+  .note-form.open { display: block; }
+  .note-form-actions { display: flex; gap: 12px; align-items: center; }
+  .btn-ghost-dark { border-color: var(--line); color: var(--ink-soft); background: none; }
+  .btn-ghost-dark:hover { border-color: var(--ink); color: var(--ink); }
+  .pull-quote {
+    max-width: 700px;
+    margin: 56px auto 0;
+    padding: 0 12px;
+    text-align: center;
+  }
+  .pull-quote p {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(20px, 3vw, 27px);
+    line-height: 1.5;
+    color: var(--ink);
+    margin: 0;
+  }
+  .pull-quote cite {
+    display: block;
+    margin-top: 16px;
+    font-style: normal;
+    font-size: 14px;
+    color: var(--concern);
+  }
+  .under-construction {
+    border: 1px dashed var(--line);
+    background: var(--tint);
+    border-radius: 20px;
+    padding: 56px 28px;
+    text-align: center;
+  }
+  .uc-emoji { font-size: 34px; }
+  .under-construction h3 { margin-top: 14px; font-size: 21px; font-style: italic; font-weight: 500; font-family: 'Fraunces', serif; }
+  .under-construction p { margin-top: 10px; color: var(--ink-soft); font-size: 15.5px; max-width: 46ch; margin-left: auto; margin-right: auto; }
+  .under-construction .btn { margin-top: 22px; }
+  .chips { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 36px; }
+  .chip {
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--ink-soft);
+    padding: 9px 18px;
+    border-radius: 999px;
+    font-size: 13.5px;
+    transition: all .15s ease;
+  }
+  .chip.active { background: var(--ink); border-color: var(--ink); color: #fff; }
+  .gallery-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+  @media (min-width: 620px) { .gallery-grid { grid-template-columns: repeat(2,1fr); } }
+  @media (min-width: 980px) { .gallery-grid { grid-template-columns: repeat(3,1fr); } }
+  .gallery-item {
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    overflow: hidden;
+    background: #fff;
+    text-align: left;
+    padding: 0;
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+  .gallery-item:hover { transform: translateY(-3px); box-shadow: 0 14px 28px rgba(59,74,92,0.1); }
+  .gallery-thumb { height: 130px; display: flex; align-items: flex-end; padding: 14px; }
+  .gallery-thumb span { font-size: 12px; color: #fff; background: rgba(0,0,0,0.18); padding: 4px 10px; border-radius: 999px; }
+  .gallery-body { padding: 18px 20px 22px; }
+  .gallery-body h3 { font-size: 18px; font-weight: 600; font-family: 'Inter'; }
+  .gallery-body p { margin-top: 8px; font-size: 14.5px; color: var(--ink-soft); }
+  .gallery-author { margin-top: 12px; font-size: 12.5px; color: var(--concern); }
+
+  /* lightbox */
+  .lightbox {
+    display: none;
+    position: fixed; inset: 0; z-index: 100;
+    background: rgba(43,56,74,0.6);
+    align-items: center; justify-content: center;
+    padding: 24px;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox-card {
+    background: #fff; border-radius: 20px; max-width: 560px; width: 100%;
+    padding: 36px; position: relative; max-height: 84vh; overflow-y: auto;
+  }
+  .lightbox-close {
+    position: absolute; top: 16px; right: 16px;
+    width: 34px; height: 34px; border-radius: 999px;
+    border: 1px solid var(--line); background: #fff; font-size: 16px; color: var(--ink-soft);
+  }
+  .lightbox-tag { font-size: 12px; color: var(--concern); }
+  .lightbox-card h3 { margin-top: 10px; font-size: 24px; }
+  .lightbox-card .lb-body { margin-top: 14px; color: var(--ink-soft); font-size: 15.5px; }
+  .lightbox-card .lb-author { margin-top: 18px; font-size: 13px; color: var(--ink-soft); }
+
+  /* ---------- Team page ---------- */
+  .team-group { margin-bottom: 56px; }
+  .team-group:last-child { margin-bottom: 0; }
+  .team-group h2 { font-size: 22px; font-style: italic; font-weight: 500; margin-bottom: 22px; }
+  .team-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+  @media (min-width: 620px) { .team-grid { grid-template-columns: repeat(2,1fr); } }
+  @media (min-width: 980px) { .team-grid { grid-template-columns: repeat(3,1fr); } }
+
+  .team-card {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    min-height: 340px;
+    display: flex;
+    align-items: flex-end;
+    background: linear-gradient(155deg, #EDEFEA 0%, #E2E5DE 100%);
+    background-size: cover;
+    background-position: center;
+  }
+  .team-card.placeholder { border: 1px dashed var(--line); }
+  .photo-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 40px;
+    color: rgba(59,74,92,0.28);
+  }
+  .card-text {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 64px 20px 20px;
+    background: linear-gradient(to top, rgba(43,56,74,0.88) 0%, rgba(43,56,74,0.55) 45%, rgba(43,56,74,0) 100%);
+  }
+  .team-card h3 { font-size: 16.5px; font-weight: 600; font-family: 'Inter'; color: #fff; }
+  .team-card .role { font-size: 13px; color: #f0a89f; margin-top: 3px; }
+  .team-card .bio { font-size: 13.5px; color: rgba(255,255,255,0.82); margin-top: 8px; line-height: 1.5; }
+
+  .team-card.add-card {
+    border: 1px dashed var(--line);
+    background: var(--tint);
+    display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+    text-decoration: none;
+    padding: 22px;
+    min-height: 340px;
+  }
+  .team-card.add-card .plus {
+    width: 40px; height: 40px; border-radius: 999px; border: 1px solid var(--concern);
+    color: var(--concern); display: flex; align-items: center; justify-content: center;
+    font-size: 20px; margin-bottom: 14px;
+  }
+  .team-card.add-card h3 { color: var(--ink); font-family: 'Inter'; font-size: 16.5px; font-weight: 600; }
+  .team-card.add-card p { font-size: 14px; color: var(--ink-soft); margin-top: 6px; }
+
+  /* ---------- Contact page ---------- */
+  .contact-grid { display: grid; grid-template-columns: 1fr; gap: 44px; }
+  @media (min-width: 800px) { .contact-grid { grid-template-columns: 1fr 1fr; } }
+  .field { margin-bottom: 18px; }
+  .field label { display: block; font-size: 13.5px; color: var(--ink-soft); margin-bottom: 7px; }
+  .field input, .field select, .field textarea {
+    width: 100%; border: 1px solid var(--line); border-radius: 10px;
+    padding: 12px 14px; font-family: inherit; font-size: 15px; color: var(--ink);
+    background: #fff;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    outline: none; border-color: var(--concern);
+  }
+  .field textarea { resize: vertical; min-height: 110px; }
+  .form-note { font-size: 13px; color: var(--ink-soft); margin-top: 6px; }
+  .contact-side h3 { font-size: 19px; font-style: italic; font-weight: 500; }
+  .contact-side p { margin-top: 10px; color: var(--ink-soft); font-size: 15.5px; }
+  .contact-email-lg { display: inline-block; margin-top: 18px; font-size: 20px; color: var(--concern); text-decoration: none; border-bottom: 1px solid var(--concern); }
+  .socials { margin-top: 28px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .socials a { font-size: 13.5px; color: var(--ink-soft); text-decoration: none; border: 1px solid var(--line); padding: 8px 16px; border-radius: 999px; }
+  .socials a:hover { border-color: var(--concern); color: var(--concern); }
+  .confirm-msg { display: none; margin-top: 16px; font-size: 14.5px; color: var(--concern); }
+  .confirm-msg.show { display: block; }
+
+  /* ---------- Footer ---------- */
+  footer { padding: 56px 0 calc(56px + env(safe-area-inset-bottom, 0px)); }
+  .footer-top { display: flex; flex-direction: column; gap: 26px; padding-bottom: 30px; border-bottom: 1px solid var(--line); }
+  @media (min-width: 700px) { .footer-top { flex-direction: row; justify-content: space-between; align-items: flex-end; } }
+  .footer-top h2 { font-size: clamp(22px, 3.2vw, 30px); max-width: 16ch; }
+  .contact-email { font-size: 19px; color: var(--concern); text-decoration: none; border-bottom: 1px solid var(--concern); padding-bottom: 2px; }
+  .footer-bottom { padding-top: 24px; display: flex; flex-direction: column; gap: 10px; font-size: 13.5px; color: var(--ink-soft); }
+  @media (min-width: 700px) { .footer-bottom { flex-direction: row; justify-content: space-between; } }
+  .footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
+  .footer-links a { text-decoration: none; color: var(--ink-soft); font-size: 13.5px; }
+  .footer-links a:hover { color: var(--concern); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+    .wordmark-big { background-position: 30% 50%; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-pill">
+    <a href="#home" class="nav-mark">Eleftheria</a>
+    <nav class="navlinks" id="navlinks">
+      <a href="#home" data-page="home">Home</a>
+      <a href="#gallery" data-page="gallery">Gallery</a>
+      <a href="#board" data-page="board">Curated Chaos</a>
+      <a href="#about" data-page="about">About</a>
+      <a href="#team" data-page="team">Team</a>
+      <a href="#contact" data-page="contact">Contact</a>
+    </nav>
+    <a href="#contact" class="nav-cta" data-page="contact">Join us</a>
+    <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
+      <span class="burger-lines"><span></span><span></span><span></span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home" data-page="home">Home</a>
+    <a href="#gallery" data-page="gallery">Gallery</a>
+    <a href="#board" data-page="board">Curated Chaos</a>
+    <a href="#about" data-page="about">About</a>
+    <a href="#team" data-page="team">Team</a>
+    <a href="#contact" data-page="contact">Contact</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ HOME ============ -->
+  <section class="page" id="page-home" data-page="home">
+    <div class="hero-outer">
+      <div class="hero-card">
+        <div class="hero-inner">
+          <h1 class="wordmark-big">Eleftheria</h1>
+          <div class="motto">
+            <span class="pair"><span class="word sa">संस्कृति</span><span class="gloss">culture</span></span>
+            <span class="dot">·</span>
+            <span class="pair"><span class="word ar">تواصل</span><span class="gloss">communication</span></span>
+            <span class="dot">·</span>
+            <span class="pair"><span class="word">Quan tâm</span><span class="gloss">concern</span></span>
+          </div>
+          <p class="mission">We exist to <strong>eradicate xenophobia and glossophobia, globally</strong> — by giving young people a real place to think about the world, and the courage to say it out loud.</p>
+          <div class="hero-cta">
+            <a class="btn btn-solid" href="#contact" data-page="contact">Get in touch</a>
+            <a class="btn btn-ghost" href="#gallery" data-page="gallery">Browse the gallery</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <blockquote class="pull-quote">
+        <p>"There is more in us than we think. If we could be made to see it, perhaps, for the rest of our lives we would be unwilling to settle for less."</p>
+        <cite>— Kurt Hahn</cite>
+      </blockquote>
+    </div>
+
+    <div class="section" style="padding-top:64px;">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">What we offer, right now</div>
+          <h2>Ways to take part today</h2>
+        </div>
+        <div class="offer-list">
+          <div class="offer-item">
+            <div class="offer-name">Voice</div>
+            <div class="offer-desc"><strong>A place to say what you actually think.</strong> Essays, opinion pieces, and open discussion on the global issues members care about — written for an audience of peers, not graded by a teacher.</div>
+          </div>
+          <div class="offer-item">
+            <div class="offer-name">Talents</div>
+            <div class="offer-desc"><strong>Not everything worth saying is an essay.</strong> Poems, writing, art, photography, and other creative work that responds to the same questions — a showcase for talent that wouldn't otherwise find an audience.</div>
+          </div>
+          <div class="offer-item">
+            <div class="offer-name">Research</div>
+            <div class="offer-desc"><strong>Real inquiry, led by teens.</strong> Members dig into global issues properly — sources, data, context — and present what they find, building research skills years before university asks them to.</div>
+          </div>
+          <div class="offer-item">
+            <div class="offer-name">Language Access</div>
+            <div class="offer-desc"><strong>Ideas shouldn't stop at a language barrier.</strong> Members translate and adapt each other's work so it reaches more readers, and so no one's fluency decides whether their thinking gets heard.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section tint">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">On the horizon</div>
+          <h2>What's coming next</h2>
+        </div>
+        <div class="soon-grid">
+          <div class="soon-card">
+            <div class="soon-tag">Coming soon</div>
+            <h3>Community Engagement</h3>
+            <p>Structured ways for members to work together beyond publishing — discussion groups, mentorship, and collaborative projects.</p>
+          </div>
+          <div class="soon-card">
+            <div class="soon-tag">Coming soon</div>
+            <h3>Global Conferences</h3>
+            <p>In-person and virtual gatherings where members present research and ideas to each other and to outside guests.</p>
+          </div>
+          <div class="soon-card">
+            <div class="soon-tag">Coming soon</div>
+            <h3>Model UN</h3>
+            <p>A youth Model UN track run through Eleftheria, connecting members who want to practice diplomacy and debate.</p>
+          </div>
+          <div class="soon-card">
+            <div class="soon-tag">Coming soon</div>
+            <h3>Community, Elsewhere</h3>
+            <p>For now, find us on social media rather than here on the site — links will go live on the Contact page as accounts launch.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ GALLERY ============ -->
+  <section class="page" id="page-gallery" data-page="gallery">
+    <div class="section" style="padding-top:56px;">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Gallery</div>
+          <h2>Talent, out loud</h2>
+          <p>Writing, art, and research from members — a place to showcase work that wouldn't otherwise find an audience.</p>
+        </div>
+        <div class="under-construction">
+          <div class="uc-emoji">🚧</div>
+          <h3>Under construction</h3>
+          <p>The gallery is empty for now — it fills up as members submit their writing, art, and research. Be the first.</p>
+          <a class="btn btn-dark" href="#contact" data-page="contact">Submit your work</a>
+        </div>
+
+        <div class="gallery-grid" id="galleryGrid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BOARD ============ -->
+  <section class="page" id="page-board" data-page="board">
+    <div class="section" style="padding-top:56px;">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Curated Chaos</div>
+          <h2>One question a week. Pin your answer.</h2>
+          <p>Every week we post a new question — something about daily life, the world, or whatever's on people's minds. Write your answer on a sticky note and pin it.</p>
+        </div>
+
+        <div class="prompt-card">
+          <div class="prompt-label">This week's question</div>
+          <h3 id="promptText">How was your week — really?</h3>
+        </div>
+
+        <div class="board-note-note">
+          <strong>How this works:</strong> your note pins to the board on your own screen right away. It also gets sent to us, so we can add real notes to the shared board for everyone within a day or two — the same way the Gallery and Team pages grow.
+        </div>
+
+        <div class="corkboard">
+          <div class="sticky-wall" id="stickyWall">
+            <div class="sticky-note c1"><p>Exhausting but okay. Exams start next week and I'm not ready.</p><span class="sticky-author">— Example note</span></div>
+            <div class="sticky-note c2"><p>Good, actually. I finally translated my first piece for the site!</p><span class="sticky-author">— Example note</span></div>
+            <div class="sticky-note c3"><p>Anxious about the news, honestly. Wanted to write about it somewhere.</p><span class="sticky-author">— Example note</span></div>
+          </div>
+        </div>
+
+        <div class="add-note-block">
+          <button class="btn btn-solid" id="openNoteForm" type="button">+ Pin a sticky note</button>
+          <form id="noteForm" class="note-form">
+            <div class="field">
+              <label for="note-name">Your name (or leave blank to stay anonymous)</label>
+              <input id="note-name" type="text" maxlength="40">
+            </div>
+            <div class="field">
+              <label for="note-text">Your note</label>
+              <textarea id="note-text" maxlength="220" required placeholder="Answer this week's question in a sentence or two…"></textarea>
+            </div>
+            <div class="note-form-actions">
+              <button type="submit" class="btn btn-solid">Pin it</button>
+              <button type="button" class="btn btn-ghost-dark" id="cancelNoteForm">Cancel</button>
+            </div>
+            <div class="confirm-msg" id="noteConfirmMsg">Pinned to your board, and sent to us for review.</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="page" id="page-about" data-page="about">
+    <div class="section" style="padding-top:56px;">
+      <div class="wrap">
+        <div class="about-grid">
+          <div>
+            <div class="eyebrow">About Eleftheria</div>
+            <h2>Freedom to be heard, wherever you're speaking from.</h2>
+          </div>
+          <div class="about-body">
+            <p>Most teenagers who care about the state of the world don't have anywhere serious to put that concern. School doesn't always leave room for it. The news treats them as an audience, not a participant. Eleftheria exists to close that gap — a space where young people can research, write, and speak about the issues shaping their generation, in their own words and, whenever possible, their own language.</p>
+            <p>We're not a classroom and we're not a campaign. We're a community: teenagers from different countries, school systems, and circumstances, working out loud on the things they can't stop thinking about — and getting better at thinking about them together.</p>
+            <p>Our name comes from the Greek word for freedom. It's a reminder of what the community is for: the freedom to think seriously about the world before anyone's asked you to, and to say what you find in more than one language.</p>
+          </div>
+        </div>
+        <div class="values-list">
+          <div class="value-card"><h3>Peer-led</h3><p>Members set the agenda. Nothing here is assigned, graded, or edited to sound older than it is.</p></div>
+          <div class="value-card"><h3>Multilingual by default</h3><p>Work gets translated, not just published — so ideas travel as far as the people who wrote them.</p></div>
+          <div class="value-card"><h3>Global, on purpose</h3><p>Members from different countries compare notes on the same issue — that comparison is the point.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TEAM ============ -->
+  <section class="page" id="page-team" data-page="team">
+    <div class="section" style="padding-top:56px;">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">The people behind it</div>
+          <h2>Founders, team, and members</h2>
+          <p>Every card here starts as a placeholder — replace it with a real photo and a bio in your own words.</p>
+        </div>
+
+        <div class="team-group">
+          <h2>Founder</h2>
+          <div class="team-grid">
+            <div class="team-card placeholder">
+              <div class="photo-placeholder">?</div>
+              <div class="card-text">
+                <h3>Add your name</h3>
+                <div class="role">Founder &amp; Director</div>
+                <div class="bio">Write a few sentences about why you started Eleftheria and what you're working on now.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="team-group">
+          <h2>Tech Team</h2>
+          <div class="team-grid">
+            <div class="team-card placeholder">
+              <div class="photo-placeholder">?</div>
+              <div class="card-text">
+                <h3>Add a name</h3>
+                <div class="role">Tech Lead</div>
+                <div class="bio">What you build and maintain for the community — the site, tools, or systems behind it.</div>
+              </div>
+            </div>
+            <a class="team-card add-card" href="#contact" data-page="contact">
+              <div class="plus">+</div>
+              <h3>Join the tech team</h3>
+              <p>Help build the platform. Send us a note on the Contact page.</p>
+            </a>
+          </div>
+        </div>
+
+        <div class="team-group">
+          <h2>Members</h2>
+          <div class="team-grid">
+            <div class="team-card placeholder">
+              <div class="photo-placeholder">?</div>
+              <div class="card-text">
+                <h3>Add a name</h3>
+                <div class="role">Member</div>
+                <div class="bio">A member writes a couple of lines about themselves and what they contribute — voice, talent, research, or translation.</div>
+              </div>
+            </div>
+            <a class="team-card add-card" href="#contact" data-page="contact">
+              <div class="plus">+</div>
+              <h3>Add yourself</h3>
+              <p>Send your photo and a short bio to be featured here.</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="page" id="page-contact" data-page="contact">
+    <div class="section" style="padding-top:56px;">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Inquiry</div>
+          <h2>Have something to say? So do we.</h2>
+          <p>Fill this in and it'll open a pre-written email in your own mail app, addressed to us — nothing is sent from here directly.</p>
+        </div>
+
+        <div class="contact-grid">
+          <form id="contactForm">
+            <div class="field">
+              <label for="cf-name">Your name</label>
+              <input id="cf-name" type="text" required>
+            </div>
+            <div class="field">
+              <label for="cf-email">Your email</label>
+              <input id="cf-email" type="email" required>
+            </div>
+            <div class="field">
+              <label for="cf-interest">What's this about</label>
+              <select id="cf-interest">
+                <option>General inquiry</option>
+                <option>Joining as a member</option>
+                <option>Voice — submitting writing</option>
+                <option>Talents — submitting creative work</option>
+                <option>Research — submitting a study</option>
+                <option>Language Access — translation</option>
+                <option>Joining the team</option>
+                <option>Something else</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="cf-message">Your message</label>
+              <textarea id="cf-message" required placeholder="Tell us what you're thinking about, or what you'd like to contribute."></textarea>
+            </div>
+            <button type="submit" class="btn btn-solid">Send inquiry</button>
+            <div class="confirm-msg" id="confirmMsg">Opening your email app with this filled in — send it from there.</div>
+          </form>
+
+          <div class="contact-side">
+            <h3>Prefer to just email us?</h3>
+            <p>Skip the form and write to us directly — same inbox, same people reading it.</p>
+            <a class="contact-email-lg" href="mailto:eleftheriaoffl15@gmail.com">eleftheriaoffl15@gmail.com</a>
+            <div class="socials">
+              <a href="#" target="_blank" rel="noopener">Instagram</a>
+              <a href="#" target="_blank" rel="noopener">X / Twitter</a>
+              <a href="#" target="_blank" rel="noopener">TikTok</a>
+            </div>
+            <p class="form-note" style="margin-top:22px;">Social links are placeholders until those accounts are live — see the Coming Soon section on the Home page.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <h2>Eleftheria</h2>
+      <div class="footer-links">
+        <a href="#home" data-page="home">Home</a>
+        <a href="#gallery" data-page="gallery">Gallery</a>
+        <a href="#board" data-page="board">Curated Chaos</a>
+        <a href="#about" data-page="about">About</a>
+        <a href="#team" data-page="team">Team</a>
+        <a href="#contact" data-page="contact">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>A global community of young people, for young people.</div>
+      <div>Open to teenagers everywhere.</div>
+    </div>
+  </div>
+</footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-card">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">✕</button>
+    <div class="lightbox-tag" id="lbTag"></div>
+    <h3 id="lbTitle"></h3>
+    <div class="lb-body" id="lbBody"></div>
+    <div class="lb-author" id="lbAuthor"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var pages = document.querySelectorAll('.page');
+  var navLinkGroups = [document.getElementById('navlinks'), document.getElementById('mobileMenu'), document.querySelector('.nav-cta') ? document.querySelector('.nav-cta').parentElement : null];
+
+  function showPage(name){
+    pages.forEach(function(p){ p.classList.toggle('active', p.getAttribute('data-page') === name); });
+    document.querySelectorAll('[data-page]').forEach(function(el){
+      if (el.tagName === 'A') el.classList.toggle('active', el.getAttribute('data-page') === name);
+    });
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.getElementById('burgerBtn').setAttribute('aria-expanded','false');
+    window.scrollTo({top:0, behavior:'instant' in window ? 'instant' : 'auto'});
+  }
+
+  function currentPageFromHash(){
+    var h = (location.hash || '#home').replace('#','');
+    var valid = ['home','gallery','board','about','team','contact'];
+    return valid.indexOf(h) > -1 ? h : 'home';
+  }
+
+  window.addEventListener('hashchange', function(){ showPage(currentPageFromHash()); });
+  showPage(currentPageFromHash());
+
+  // mobile menu toggle
+  var burger = document.getElementById('burgerBtn');
+  var menu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', function(){
+    var open = menu.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  // gallery filter
+  var chips = document.querySelectorAll('.chip');
+  var items = document.querySelectorAll('.gallery-item');
+  chips.forEach(function(chip){
+    chip.addEventListener('click', function(){
+      chips.forEach(function(c){ c.classList.remove('active'); });
+      chip.classList.add('active');
+      var f = chip.getAttribute('data-filter');
+      items.forEach(function(item){
+        var show = f === 'all' || item.getAttribute('data-category') === f;
+        item.style.display = show ? '' : 'none';
+      });
+    });
+  });
+
+  // lightbox
+  var lightbox = document.getElementById('lightbox');
+  items.forEach(function(item){
+    item.addEventListener('click', function(){
+      document.getElementById('lbTag').textContent = item.getAttribute('data-tag');
+      document.getElementById('lbTitle').textContent = item.getAttribute('data-title');
+      document.getElementById('lbBody').textContent = item.getAttribute('data-body');
+      document.getElementById('lbAuthor').textContent = item.getAttribute('data-author');
+      lightbox.classList.add('open');
+    });
+  });
+  function closeLightbox(){ lightbox.classList.remove('open'); }
+  document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', function(e){ if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeLightbox(); });
+
+  // contact form -> actually emails eleftheriaoffl15@gmail.com via FormSubmit
+  var ELEFTHERIA_EMAIL = 'eleftheriaoffl15@gmail.com';
+  var form = document.getElementById('contactForm');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = document.getElementById('cf-name').value.trim();
+    var email = document.getElementById('cf-email').value.trim();
+    var interest = document.getElementById('cf-interest').value;
+    var message = document.getElementById('cf-message').value.trim();
+    var confirm = document.getElementById('confirmMsg');
+    var submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    fetch('https://formsubmit.co/ajax/' + ELEFTHERIA_EMAIL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        _subject: 'Eleftheria inquiry: ' + interest,
+        Name: name,
+        Email: email,
+        Topic: interest,
+        Message: message
+      })
+    }).then(function(res){
+      if (!res.ok) throw new Error('send failed');
+      confirm.textContent = 'Sent — thanks, we\'ll get back to you at ' + email + '.';
+      confirm.classList.add('show');
+      form.reset();
+    }).catch(function(){
+      // fallback: open the pre-filled email so nothing is lost
+      var subject = 'Eleftheria inquiry: ' + interest;
+      var body = 'Name: ' + name + '\nEmail: ' + email + '\n\n' + message;
+      window.location.href = 'mailto:' + ELEFTHERIA_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      confirm.textContent = 'Couldn\'t send automatically — opening your email app instead.';
+      confirm.classList.add('show');
+    }).finally(function(){
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send inquiry';
+    });
+  });
+
+  // ---------- Board: sticky notes ----------
+  var wall = document.getElementById('stickyWall');
+  var colorClasses = ['c1','c2','c3','c4','c5'];
+  var STORAGE_KEY = 'eleftheria_board_notes';
+
+  function addNoteToWall(name, text){
+    var note = document.createElement('div');
+    var cls = colorClasses[Math.floor(Math.random() * colorClasses.length)];
+    note.className = 'sticky-note ' + cls;
+    var p = document.createElement('p');
+    p.textContent = text;
+    var span = document.createElement('span');
+    span.className = 'sticky-author';
+    span.textContent = '— ' + (name || 'Anonymous');
+    note.appendChild(p);
+    note.appendChild(span);
+    wall.appendChild(note);
+  }
+
+  function loadSavedNotes(){
+    try {
+      var saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      saved.forEach(function(n){ addNoteToWall(n.name, n.text); });
+    } catch(e) { /* localStorage unavailable — skip silently */ }
+  }
+  loadSavedNotes();
+
+  var openBtn = document.getElementById('openNoteForm');
+  var noteForm = document.getElementById('noteForm');
+  var cancelBtn = document.getElementById('cancelNoteForm');
+  openBtn.addEventListener('click', function(){
+    noteForm.classList.add('open');
+    openBtn.style.display = 'none';
+    document.getElementById('note-text').focus();
+  });
+  cancelBtn.addEventListener('click', function(){
+    noteForm.classList.remove('open');
+    openBtn.style.display = '';
+    noteForm.reset();
+  });
+
+  noteForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = document.getElementById('note-name').value.trim();
+    var text = document.getElementById('note-text').value.trim();
+    if (!text) return;
+
+    addNoteToWall(name, text);
+    try {
+      var saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      saved.push({ name: name, text: text, ts: Date.now() });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+    } catch(e) { /* localStorage unavailable — note still shows for this visit */ }
+
+    fetch('https://formsubmit.co/ajax/' + ELEFTHERIA_EMAIL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        _subject: 'New Eleftheria board note',
+        Name: name || 'Anonymous',
+        Note: text
+      })
+    }).catch(function(){ /* note still pinned locally even if email fails */ });
+
+    var confirm = document.getElementById('noteConfirmMsg');
+    confirm.classList.add('show');
+    noteForm.reset();
+    setTimeout(function(){
+      noteForm.classList.remove('open');
+      openBtn.style.display = '';
+      confirm.classList.remove('show');
+    }, 2200);
+  });
+})();
+</script>
+
+</body>
+</html>
